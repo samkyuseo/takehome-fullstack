@@ -1,16 +1,15 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+
 const path = require('path');
 const Routes = require('./routes');
 
 const app = express();
 
-// look for environment variable called port when deployed. if local take 3000
 const PORT = process.env.PORT || 3000; 
 
-app.use(bodyParser.json());
+app.use(express.json({extended: false}));
 app.use(express.static(path.join(__dirname, 'build')));
-// test 
+
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../README.md')));
 
 app.get('/api/quizzes', Routes.getQuizzes);
