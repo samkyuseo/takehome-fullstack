@@ -1,9 +1,11 @@
 const quizzes = require('../../data/quizzes.json');
 
+// next() is not required by the current routes but may be needed in the future it was not deleted. 
+
 // @route  GET api/quizzes 
 // @desc   Returns a list of quizzes with titles and IDs
 // @access Public
-async function getQuizzes(req, res) {
+async function getQuizzes(req, res, next) {
   // return quizzes
   return res.status(200).json(quizzes);
 }
@@ -11,7 +13,7 @@ async function getQuizzes(req, res) {
 // @route  GET api/quizzes/:id
 // @desc   Returns quiz data for the given ID, omitting the answers
 // @access Public
-async function getQuiz(req, res) {
+async function getQuiz(req, res, next) {
    // find quiz
    const id = req.params.id
    var quiz = undefined
@@ -36,7 +38,7 @@ async function getQuiz(req, res) {
 // @route  POST api/quizzes/:id/attempt
 // @desc   Handles a quiz submission and returns a graded result
 // @access Public
-async function postQuiz(req, res) {
+async function postQuiz(req, res, next) {
   // validate req.body
   
   if (req.body.answers === undefined) {
